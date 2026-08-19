@@ -50,11 +50,7 @@ The proof is not a lower bound for a particular calibration statistic. It classi
 
 Our main representation theorem shows that the Bayes risk, or entropy, of every bounded path-local proper score decomposes over the internal nodes of the probability tree. Each node contributes its visitation probability times a concave binary entropy. This is a converse to the familiar construction that sums one-step proper losses. The representation holds even when the original measure is discontinuous and chooses different supporting hyperplanes at nonsmooth points.
 
-The remaining obstacle is precisely that nonsmooth freedom. Each one-dimensional concave node entropy is nondifferentiable at only countably many probabilities. There are countably many nodes over all finite horizons, so one fixed \(\beta\in(1/3,2/3)\), distinct from \(1/2\), avoids every exceptional point. At the constant report \(\beta\), the supporting score is unique and equals the sum of the nodewise tangent losses. Deterministic completeness and boundedness let us normalize every node entropy to vanish at \(0\) and \(1\). The tangent losses are then nonnegative. A short concavity argument gives, at every node,
-\[
-\E_{Y\sim\Ber(1/2)}\ell_{\beta}(Y)\le 2h(1/2).
-\]
-Summing with the true history probabilities proves that the wrong constant report costs at most twice the truthful error. Product completeness and product soundness now contradict each other.
+The remaining obstacle is precisely that nonsmooth freedom. Each one-dimensional concave node entropy is nondifferentiable at only countably many probabilities. There are countably many nodes over all finite horizons, so one fixed \(\beta\in(1/3,2/3)\), distinct from \(1/2\), avoids every exceptional point. At the constant report \(\beta\), the supporting score is unique and equals the sum of the nodewise tangent losses. Deterministic completeness and boundedness let us normalize every node entropy to vanish at \(0\) and \(1\). The tangent losses are then nonnegative. A short concavity argument gives, at every node, \[ \E_{Y\sim\Ber(1/2)}\ell_{\beta}(Y)\le 2h(1/2). \] Summing with the true history probabilities proves that the wrong constant report costs at most twice the truthful error. Product completeness and product soundness now contradict each other.
 
 The theorem pinpoints the information boundary. Suppose the evaluator receives the entire probability tree. It can compute the tree's reported expectation \(\mu\) of \(\sum_tX_t\) and use \(T^{-1}(\sum_t x_t-\mu)^2\). This score is perfectly truthful. Its truthful risk under i.i.d. Bernoulli data is \(O(1)\), while any fixed incorrect product tree has \(\Omega(T)\) risk. The construction is unavailable from one realized path because \(\mu\) depends on forecasts in unrealized branches.
 
@@ -78,8 +74,7 @@ The theorem pinpoints the information boundary. Suppose the evaluator receives t
 
 \begin{table}[t]
 \centering
-\footnotesize
-\setlength{\tabcolsep}{3pt}
+\footnotesize \setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}lcccc@{}}
 \toprule
 Result & Setting & Complete & Sound & Perfect truth \\
@@ -97,70 +92,24 @@ This work, full-tree score & full forecast tree & yes & product & yes \\
 
 \section{Setup}
 
-Write \(\{0,1\}^{<T}=\bigcup_{t=0}^{T-1}\{0,1\}^t\), and let \(x_{<t}=(x_1,\ldots,x_{t-1})\). A deterministic forecaster is a binary probability tree \(A=(a_u)_{u\in\{0,1\}^{<T}}\), where \(a_u\in[0,1]\) is the prediction after history \(u\). On outcome sequence \(x\in\{0,1\}^T\), its realized prediction vector is
-\[
-A(x)=(a_{x_{<1}},\ldots,a_{x_{<T}}).
-\]
-A calibration measure is a family \(M=(M_T)_{T\ge1}\) with \(M_T:\{0,1\}^T\times[0,1]^T\to[0,T]\). Its expected error under outcome distribution \(P\) and strategy \(A\) is
-\[
-\operatorname{err}_{M_T}(P,A)=\E_{X\sim P}M_T(X,A(X)).
-\]
+Write \(\{0,1\}^{<T}=\bigcup_{t=0}^{T-1}\{0,1\}^t\), and let \(x_{<t}=(x_1,\ldots,x_{t-1})\). A deterministic forecaster is a binary probability tree \(A=(a_u)_{u\in\{0,1\}^{<T}}\), where \(a_u\in[0,1]\) is the prediction after history \(u\). On outcome sequence \(x\in\{0,1\}^T\), its realized prediction vector is \[ A(x)=(a_{x_{<1}},\ldots,a_{x_{<T}}). \] A calibration measure is a family \(M=(M_T)_{T\ge1}\) with \(M_T:\{0,1\}^T\times[0,1]^T\to[0,T]\). Its expected error under outcome distribution \(P\) and strategy \(A\) is \[ \operatorname{err}_{M_T}(P,A)=\E_{X\sim P}M_T(X,A(X)). \]
 
-For a full-support \(P\in\simplex(\{0,1\}^T)\), its truthful tree has node reports
-\[
-q_u=P(X_{|u|+1}=1\mid X_{1:|u|}=u).
-\]
-At zero-probability histories the truthful report can be chosen arbitrarily.
+For a full-support \(P\in\simplex(\{0,1\}^T)\), its truthful tree has node reports \[ q_u=P(X_{|u|+1}=1\mid X_{1:|u|}=u). \] At zero-probability histories the truthful report can be chosen arbitrarily.
 
 \begin{definition}[Truthfulness, completeness, and soundness]\label{def:properties}
-The measure \(M\) is perfectly truthful if the truthful tree minimizes expected error for every \(T\) and every \(P\). It is deterministically complete if \(M_T(x,x)=0\) for all \(T,x\). It is product-complete if, for every fixed \(\alpha\in[0,1]\),
-\[
-\E_{X\sim\Ber(\alpha)^{\otimes T}}M_T(X,\alpha\1)=o_\alpha(T).
-\]
-It is product-sound if, for every fixed \(\alpha\ne\beta\),
-\[
-\E_{X\sim\Ber(\alpha)^{\otimes T}}M_T(X,\beta\1)=\Omega_{\alpha,\beta}(T).
-\]
+The measure \(M\) is perfectly truthful if the truthful tree minimizes expected error for every \(T\) and every \(P\). It is deterministically complete if \(M_T(x,x)=0\) for all \(T,x\). It is product-complete if, for every fixed \(\alpha\in[0,1]\), \[ \E_{X\sim\Ber(\alpha)^{\otimes T}}M_T(X,\alpha\1)=o_\alpha(T). \] It is product-sound if, for every fixed \(\alpha\ne\beta\), \[ \E_{X\sim\Ber(\alpha)^{\otimes T}}M_T(X,\beta\1)=\Omega_{\alpha,\beta}(T). \]
 \end{definition}
 
 Deterministic and product completeness are exactly the two completeness clauses of \citet{haghtalab2024truthfulness}. Product soundness is one of their two soundness clauses. Their other soundness clause requires linear error on the pointwise opposite prediction. The later definition of \citet{qiao2025decision} adds sublinear error on every empirically calibrated pair. Our impossibility does not need either addition.
 
-Every interior report tree \(A\), with \(a_u\in(0,1)\), induces a unique full-support distribution \(Q_A\) on the leaves:
-\[
-Q_A(x)=\prod_{t=1}^T a_{x_{<t}}^{x_t}(1-a_{x_{<t}})^{1-x_t}.
-\]
-Conversely, the truthful tree of \(Q_A\) is \(A\). Define the induced leaf score and its Bayes risk by
-\[
-S_T(Q,x)=M_T(x,A_Q(x)),\qquad H_T(P)=\E_{X\sim P}S_T(P,X).
-\tag{1}
-\]
-Perfect truthfulness says that \(S_T\) is a proper scoring rule:
-\[
-H_T(P)\le \E_{X\sim P}S_T(Q,X)
-\tag{2}
-\]
-for all full-support \(P,Q\). It follows that \(H_T\) is concave. Crucially, \(S_T(Q,x)\) depends only on the conditional probabilities of \(Q\) along the realized path to \(x\).
+Every interior report tree \(A\), with \(a_u\in(0,1)\), induces a unique full-support distribution \(Q_A\) on the leaves: \[ Q_A(x)=\prod_{t=1}^T a_{x_{<t}}^{x_t}(1-a_{x_{<t}})^{1-x_t}. \] Conversely, the truthful tree of \(Q_A\) is \(A\). Define the induced leaf score and its Bayes risk by \[ S_T(Q,x)=M_T(x,A_Q(x)),\qquad H_T(P)=\E_{X\sim P}S_T(P,X). \tag{1} \] Perfect truthfulness says that \(S_T\) is a proper scoring rule: \[ H_T(P)\le \E_{X\sim P}S_T(Q,X) \tag{2} \] for all full-support \(P,Q\). It follows that \(H_T\) is concave. Crucially, \(S_T(Q,x)\) depends only on the conditional probabilities of \(Q\) along the realized path to \(x\).
 
 \section{The tree-additive representation}
 
 The representation theorem is stated for binary trees because that is the calibration framework of Definition~\ref{def:properties}. For a history \(u\), write \(P(u)=P(X_{1:|u|}=u)\).
 
 \begin{theorem}[Tree-additive entropy]\label{thm:factorization}
-Fix \(T\) and a bounded perfectly truthful realized-path score. There are bounded concave functions \(h_{T,u}:[0,1]\to\mathbb R\), one for every \(u\in\{0,1\}^{<T}\), such that every full-support distribution \(P\) satisfies
-\[
-H_T(P)=\sum_{u\in\{0,1\}^{<T}}P(u)h_{T,u}(q_u).
-\tag{3}
-\]
-If the score is nonnegative and deterministically complete, the functions can be chosen so that
-\[
-h_{T,u}(0)=h_{T,u}(1)=0,\qquad h_{T,u}(q)\ge0.
-\tag{4}
-\]
-At any report distribution \(Q\) where every \(h_{T,u}\) is differentiable at the corresponding conditional \(q_u\), the actual realized score is
-\[
-S_T(Q,x)=\sum_{u\prec x}\left[h_{T,u}(q_u)+(x_{|u|+1}-q_u)h_{T,u}'(q_u)\right].
-\tag{5}
-\]
+Fix \(T\) and a bounded perfectly truthful realized-path score. There are bounded concave functions \(h_{T,u}:[0,1]\to\mathbb R\), one for every \(u\in\{0,1\}^{<T}\), such that every full-support distribution \(P\) satisfies \[ H_T(P)=\sum_{u\in\{0,1\}^{<T}}P(u)h_{T,u}(q_u). \tag{3} \] If the score is nonnegative and deterministically complete, the functions can be chosen so that \[ h_{T,u}(0)=h_{T,u}(1)=0,\qquad h_{T,u}(q)\ge0. \tag{4} \] At any report distribution \(Q\) where every \(h_{T,u}\) is differentiable at the corresponding conditional \(q_u\), the actual realized score is \[ S_T(Q,x)=\sum_{u\prec x}\left[h_{T,u}(q_u)+(x_{|u|+1}-q_u)h_{T,u}'(q_u)\right]. \tag{5} \]
 \end{theorem}
 
 Equation~(3) says that the expected truthful score is assembled from binary uncertainty at each visited history. Equation~(5) is stronger at smooth reports. It identifies the actual measure, not only its expectation.
@@ -171,75 +120,28 @@ The proof starts with a binary rigidity fact. It is useful because the condition
 Let \((\ell_0,\ell_1)\) and \((\widetilde\ell_0,\ell_1)\) be bounded proper binary losses on \((0,1)\). Then \(\ell_0-\widetilde\ell_0\) is constant. The symmetric statement holds when the zero-outcome component is shared.
 \end{lemma}
 
-For \(0<p<q<1\), properness at true parameters \(p\) and \(q\) traps the increment of \(\ell_0\):
-\[
-\frac{p}{1-p}\bigl(\ell_1(p)-\ell_1(q)\bigr)
-\le \ell_0(q)-\ell_0(p)
-\le \frac{q}{1-q}\bigl(\ell_1(p)-\ell_1(q)\bigr).
-\tag{6}
-\]
-The same interval traps the increment of \(\widetilde\ell_0\). On a refining partition, the sum of the interval widths tends to zero because \(\ell_1\) is bounded and monotone. Thus the two increments agree. Appendix~\ref{app:shared} gives the details.
+For \(0<p<q<1\), properness at true parameters \(p\) and \(q\) traps the increment of \(\ell_0\): \[ \frac{p}{1-p}\bigl(\ell_1(p)-\ell_1(q)\bigr) \le \ell_0(q)-\ell_0(p) \le \frac{q}{1-q}\bigl(\ell_1(p)-\ell_1(q)\bigr). \tag{6} \] The same interval traps the increment of \(\widetilde\ell_0\). On a refining partition, the sum of the interval widths tends to zero because \(\ell_1\) is bounded and monotone. Thus the two increments agree. Appendix~\ref{app:shared} gives the details.
 
-To see how Lemma~\ref{lem:shared} yields Theorem~\ref{thm:factorization}, split a leaf distribution at the root as
-\[
-P=((1-a)P_0,aP_1).
-\]
-Path locality writes the score on root branch \(b\) as \(S_b(p,Q_b,x)\), with no dependence on \(Q_{1-b}\). For fixed root report \(p\), this is a proper score for the conditional leaf distribution in branch \(b\). Let its entropy be \(K_b^p(R)\). Varying only the root report shows that
-\[
-p\mapsto\bigl(K_0^p(R_0),K_1^p(R_1)\bigr)
-\]
-is a proper binary loss for every \(R_0,R_1\). Holding one conditional fixed and applying Lemma~\ref{lem:shared} gives
-\[
-K_b^p(R)=a_b(p)+K_b(R).
-\tag{7}
-\]
-The pair \((a_0,a_1)\) is proper at the root, and each \(K_b\) is the entropy of a bounded path-local proper score on a depth-\((T-1)\) tree. Recursion proves Equation~(3).
+To see how Lemma~\ref{lem:shared} yields Theorem~\ref{thm:factorization}, split a leaf distribution at the root as \[ P=((1-a)P_0,aP_1). \] Path locality writes the score on root branch \(b\) as \(S_b(p,Q_b,x)\), with no dependence on \(Q_{1-b}\). For fixed root report \(p\), this is a proper score for the conditional leaf distribution in branch \(b\). Let its entropy be \(K_b^p(R)\). Varying only the root report shows that \[ p\mapsto\bigl(K_0^p(R_0),K_1^p(R_1)\bigr) \] is a proper binary loss for every \(R_0,R_1\). Holding one conditional fixed and applying Lemma~\ref{lem:shared} gives \[ K_b^p(R)=a_b(p)+K_b(R). \tag{7} \] The pair \((a_0,a_1)\) is proper at the root, and each \(K_b\) is the entropy of a bounded path-local proper score on a depth-\((T-1)\) tree. Recursion proves Equation~(3).
 
-The endpoint normalization needs no continuity. If \(P\) approaches a deterministic leaf \(x\), perfect truthfulness allows comparison with the strategy hard-coded to predict \(x\). It loses zero on \(x\) and at most \(T\) elsewhere, so
-\[
-0\le H_T(P)\le T(1-P(x))\longrightarrow0.
-\tag{8}
-\]
-The endpoint values of the node entropies therefore sum to zero on every root-to-leaf path. Affine node potentials set both endpoints of every \(h_{T,u}\) to zero while telescoping out of Equation~(3). Concavity then gives nonnegativity. Finally, the score vector in Equation~(2) is a supporting hyperplane of \(H_T\). When all node entropies are differentiable, this hyperplane is unique. Differentiating the perspective term \(P(u)h_{T,u}(q_u)\) gives Equation~(5).
+The endpoint normalization needs no continuity. If \(P\) approaches a deterministic leaf \(x\), perfect truthfulness allows comparison with the strategy hard-coded to predict \(x\). It loses zero on \(x\) and at most \(T\) elsewhere, so \[ 0\le H_T(P)\le T(1-P(x))\longrightarrow0. \tag{8} \] The endpoint values of the node entropies therefore sum to zero on every root-to-leaf path. Affine node potentials set both endpoints of every \(h_{T,u}\) to zero while telescoping out of Equation~(3). Concavity then gives nonnegativity. Finally, the score vector in Equation~(2) is a supporting hyperplane of \(H_T\). When all node entropies are differentiable, this hyperplane is unique. Differentiating the perspective term \(P(u)h_{T,u}(q_u)\) gives Equation~(5).
 
 \section{Perfect truthfulness contradicts soundness}
 
 The local comparison behind the impossibility is elementary.
 
 \begin{lemma}[Tangent comparison]\label{lem:tangent}
-Let \(h:[0,1]\to\mathbb R_+\) be concave with \(h(0)=h(1)=0\), and suppose \(h\) is differentiable at \(p\in(0,1)\). Define
-\[
-\ell_p(b)=h(p)+(b-p)h'(p),\qquad b\in\{0,1\}.
-\]
-For every \(q\in(0,1)\),
-\[
-(1-q)\ell_p(0)+q\ell_p(1)\le C_{p,q}h(q),
-\tag{9}
-\]
-where
-\[
-C_{p,q}=\max\left\{\frac q p,\frac{1-q}{1-p}\right\}
-\max\left\{\frac p q,\frac{1-p}{1-q}\right\}.
-\]
+Let \(h:[0,1]\to\mathbb R_+\) be concave with \(h(0)=h(1)=0\), and suppose \(h\) is differentiable at \(p\in(0,1)\). Define \[ \ell_p(b)=h(p)+(b-p)h'(p),\qquad b\in\{0,1\}. \] For every \(q\in(0,1)\), \[ (1-q)\ell_p(0)+q\ell_p(1)\le C_{p,q}h(q), \tag{9} \] where \[ C_{p,q}=\max\left\{\frac q p,\frac{1-q}{1-p}\right\} \max\left\{\frac p q,\frac{1-p}{1-q}\right\}. \]
 \end{lemma}
 
-The tangent line lies above the zero endpoint values, hence \(\ell_p(0),\ell_p(1)\ge0\). Reweighting these two nonnegative numbers gives
-\[
-(1-q)\ell_p(0)+q\ell_p(1)
-\le \max\left\{\frac q p,\frac{1-q}{1-p}\right\}h(p).
-\]
-Concavity between \(p,q\), and the appropriate endpoint gives the second factor in Equation~(9).
+The tangent line lies above the zero endpoint values, hence \(\ell_p(0),\ell_p(1)\ge0\). Reweighting these two nonnegative numbers gives \[ (1-q)\ell_p(0)+q\ell_p(1) \le \max\left\{\frac q p,\frac{1-q}{1-p}\right\}h(p). \] Concavity between \(p,q\), and the appropriate endpoint gives the second factor in Equation~(9).
 
 \begin{theorem}[Sequential impossibility]\label{thm:impossibility}
 No calibration measure \(M_T:\{0,1\}^T\times[0,1]^T\to[0,T]\) is simultaneously perfectly truthful, deterministically complete, product-complete, and product-sound.
 \end{theorem}
 
 \begin{proof}
-Apply Theorem~\ref{thm:factorization} at every horizon. Each concave node entropy is nondifferentiable at at most countably many points. The union of these exceptional sets over all nodes and horizons is countable. Choose one fixed
-\[
-\beta\in(1/3,2/3)\setminus\{1/2\}
-\]
-outside this union, and set \(\alpha=1/2\).
+Apply Theorem~\ref{thm:factorization} at every horizon. Each concave node entropy is nondifferentiable at at most countably many points. The union of these exceptional sets over all nodes and horizons is countable. Choose one fixed \[ \beta\in(1/3,2/3)\setminus\{1/2\} \] outside this union, and set \(\alpha=1/2\).
 
 At the product report \(Q_\beta=\Ber(\beta)^{\otimes T}\), every node conditional is \(\beta\). Equation~(5) and Lemma~\ref{lem:tangent} give
 \begin{align*}
@@ -248,20 +150,13 @@ At the product report \(Q_\beta=\Ber(\beta)^{\otimes T}\), every node conditiona
 &=C_{\beta,1/2}H_T(P_{1/2})\\
 &=C_{\beta,1/2}\E_{X\sim\Ber(1/2)^{\otimes T}}M_T(X,\tfrac12\1).
 \end{align*}
-For \(\beta\in(1/3,2/3)\), the constant is
-\[
-C_{\beta,1/2}=\max\left\{\frac{\beta}{1-\beta},\frac{1-\beta}{\beta}\right\}<2.
-\]
-Product completeness makes the last expectation \(o(T)\). Product soundness requires the first expectation to be \(\Omega(T)\), a contradiction.
+For \(\beta\in(1/3,2/3)\), the constant is \[ C_{\beta,1/2}=\max\left\{\frac{\beta}{1-\beta},\frac{1-\beta}{\beta}\right\}<2. \] Product completeness makes the last expectation \(o(T)\). Product soundness requires the first expectation to be \(\Omega(T)\), a contradiction.
 \end{proof}
 
 The same history law \(P_{1/2}(u)\) weights both sides of the nodewise comparison. No likelihood-ratio comparison between the truthful and incorrect product distributions is used. This point rules out an apparent escape in which a measure concentrates penalties on histories that are rare under the reported model.
 
 \begin{corollary}[Quantitative failure]\label{cor:quantitative}
-For every bounded, perfectly truthful, deterministically complete family \(M\), there is a fixed \(\beta\in(1/3,2/3)\setminus\{1/2\}\) such that, for every \(T\),
-\[
-\E_{P_{1/2}}M_T(X,\beta\1)\le2\E_{P_{1/2}}M_T(X,\tfrac12\1).
-\]
+For every bounded, perfectly truthful, deterministically complete family \(M\), there is a fixed \(\beta\in(1/3,2/3)\setminus\{1/2\}\) such that, for every \(T\), \[ \E_{P_{1/2}}M_T(X,\beta\1)\le2\E_{P_{1/2}}M_T(X,\tfrac12\1). \]
 \end{corollary}
 
 Thus the obstruction is stronger than the failure of a particular asymptotic rate. A fixed wrong report cannot even be separated from truth by more than a universal factor.
@@ -270,30 +165,14 @@ Thus the obstruction is stronger than the failure of a particular asymptotic rat
 
 The standard evaluator observes \(A(X)\), not the reports at histories outside the realized path. We now show that this restriction is exactly where the impossibility enters.
 
-Suppose an evaluator receives the full probability tree \(A\). Let \(Q_A\) be its induced leaf distribution and define
-\[
-\mu(A)=\E_{Y\sim Q_A}\sum_{t=1}^T Y_t,
-\qquad
-M_T^{\mathrm{tree}}(x,A)=\frac1T\left(\sum_{t=1}^T x_t-\mu(A)\right)^2.
-\tag{10}
-\]
+Suppose an evaluator receives the full probability tree \(A\). Let \(Q_A\) be its induced leaf distribution and define \[ \mu(A)=\E_{Y\sim Q_A}\sum_{t=1}^T Y_t, \qquad M_T^{\mathrm{tree}}(x,A)=\frac1T\left(\sum_{t=1}^T x_t-\mu(A)\right)^2. \tag{10} \]
 
 \begin{proposition}[Full-tree possibility]\label{prop:fulltree}
 The score in Equation~(10) takes values in \([0,T]\), is perfectly truthful for every joint outcome distribution, is zero on deterministic truth, and is product-complete and product-sound.
 \end{proposition}
 
 \begin{proof}
-For true distribution \(P\), write \(Z=\sum_tX_t\). Then
-\[
-\E_P M_T^{\mathrm{tree}}(X,A)
-=\frac{\operatorname{Var}_P(Z)}{T}
-+\frac{(\E_PZ-\mu(A))^2}{T}.
-\]
-The truthful tree induces \(P\) and reports \(\mu(A_P)=\E_PZ\), so it is optimal. For deterministic \(P=\delta_x\), its score is zero. Under \(P_\alpha=\Ber(\alpha)^{\otimes T}\), the truthful expected score is \(\alpha(1-\alpha)\). The constant tree \(A\equiv\beta\) has expected score
-\[
-\alpha(1-\alpha)+T(\alpha-\beta)^2.
-\]
-This is linear for every fixed \(\alpha\ne\beta\).
+For true distribution \(P\), write \(Z=\sum_tX_t\). Then \[ \E_P M_T^{\mathrm{tree}}(X,A) =\frac{\operatorname{Var}_P(Z)}{T} +\frac{(\E_PZ-\mu(A))^2}{T}. \] The truthful tree induces \(P\) and reports \(\mu(A_P)=\E_PZ\), so it is optimal. For deterministic \(P=\delta_x\), its score is zero. Under \(P_\alpha=\Ber(\alpha)^{\otimes T}\), the truthful expected score is \(\alpha(1-\alpha)\). The constant tree \(A\equiv\beta\) has expected score \[ \alpha(1-\alpha)+T(\alpha-\beta)^2. \] This is linear for every fixed \(\alpha\ne\beta\).
 \end{proof}
 
 The score only elicits the expected total count, so truth need not be its unique minimizer. Perfect truthfulness in the calibration definition also does not require uniqueness. Computing \(\mu(A)\) requires integrating over unrealized branches. One path of scalar conditional forecasts contains insufficient information.
@@ -311,49 +190,13 @@ The proof leaves several directions open. Approximate truthfulness remains possi
 
 \section{Proper-score preliminaries}\label{app:proper}
 
-We record the finite-dimensional facts used in the proof. Let \(\mathcal Y\) be finite. A loss-oriented score \(S(Q,y)\) is proper if
-\[
-\E_{Y\sim P}S(P,Y)\le \E_{Y\sim P}S(Q,Y)
-\]
-for all \(P,Q\in\simplex(\mathcal Y)\). Its entropy is \(H(P)=\E_PS(P,Y)\). Since
-\[
-H(P)=\inf_Q\E_PS(Q,Y),
-\]
-it is an infimum of affine functions of \(P\) and is therefore concave. For each \(Q\), the vector \(S(Q,\cdot)\) defines an affine majorant of \(H\):
-\[
-H(P)\le \sum_yP(y)S(Q,y),
-\qquad
-H(Q)=\sum_yQ(y)S(Q,y).
-\tag{11}
-\]
-Conversely, a choice of supporting affine majorant at every \(Q\) defines a proper score. This is the finite-outcome Savage representation \citep{gneiting2007strictly,dawid2012local}.
+We record the finite-dimensional facts used in the proof. Let \(\mathcal Y\) be finite. A loss-oriented score \(S(Q,y)\) is proper if \[ \E_{Y\sim P}S(P,Y)\le \E_{Y\sim P}S(Q,Y) \] for all \(P,Q\in\simplex(\mathcal Y)\). Its entropy is \(H(P)=\E_PS(P,Y)\). Since \[ H(P)=\inf_Q\E_PS(Q,Y), \] it is an infimum of affine functions of \(P\) and is therefore concave. For each \(Q\), the vector \(S(Q,\cdot)\) defines an affine majorant of \(H\): \[ H(P)\le \sum_yP(y)S(Q,y), \qquad H(Q)=\sum_yQ(y)S(Q,y). \tag{11} \] Conversely, a choice of supporting affine majorant at every \(Q\) defines a proper score. This is the finite-outcome Savage representation \citep{gneiting2007strictly,dawid2012local}.
 
-If \(H\) is differentiable at an interior \(Q\), the supporting affine function in Equation~(11) is unique. To see the normalization explicitly, extend \(H\) homogeneously to the positive cone by
-\[
-\overline H(z)=\left(\sum_yz_y\right)H\left(\frac{z}{\sum_yz_y}\right).
-\]
-The score vector is a supergradient of the concave one-homogeneous function \(\overline H\). At differentiability points it equals \(\nabla\overline H(Q)\).
+If \(H\) is differentiable at an interior \(Q\), the supporting affine function in Equation~(11) is unique. To see the normalization explicitly, extend \(H\) homogeneously to the positive cone by \[ \overline H(z)=\left(\sum_yz_y\right)H\left(\frac{z}{\sum_yz_y}\right). \] The score vector is a supergradient of the concave one-homogeneous function \(\overline H\). At differentiability points it equals \(\nabla\overline H(Q)\).
 
 \section{Proof of shared-side uniqueness}\label{app:shared}
 
-We prove Lemma~\ref{lem:shared}. A bounded pair \((\ell_0,\ell_1)\) is proper when, for all \(p,q\in(0,1)\),
-\[
-(1-q)\ell_0(q)+q\ell_1(q)
-\le(1-q)\ell_0(p)+q\ell_1(p).
-\tag{12}
-\]
-Fix \(0<p<q<1\). Apply Equation~(12) first with true parameter \(p\) and report \(q\), then with true parameter \(q\) and report \(p\). With
-\[
-\Delta_0=\ell_0(q)-\ell_0(p),
-\qquad
-\Delta_1=\ell_1(p)-\ell_1(q),
-\]
-the two inequalities become
-\[
-\frac{p}{1-p}\Delta_1\le\Delta_0\le\frac{q}{1-q}\Delta_1.
-\tag{13}
-\]
-The interval is nonempty only if \(\Delta_1\ge0\), and then \(\Delta_0\ge0\). Thus \(\ell_0\) is nondecreasing and \(\ell_1\) is nonincreasing.
+We prove Lemma~\ref{lem:shared}. A bounded pair \((\ell_0,\ell_1)\) is proper when, for all \(p,q\in(0,1)\), \[ (1-q)\ell_0(q)+q\ell_1(q) \le(1-q)\ell_0(p)+q\ell_1(p). \tag{12} \] Fix \(0<p<q<1\). Apply Equation~(12) first with true parameter \(p\) and report \(q\), then with true parameter \(q\) and report \(p\). With \[ \Delta_0=\ell_0(q)-\ell_0(p), \qquad \Delta_1=\ell_1(p)-\ell_1(q), \] the two inequalities become \[ \frac{p}{1-p}\Delta_1\le\Delta_0\le\frac{q}{1-q}\Delta_1. \tag{13} \] The interval is nonempty only if \(\Delta_1\ge0\), and then \(\Delta_0\ge0\). Thus \(\ell_0\) is nondecreasing and \(\ell_1\) is nonincreasing.
 
 Let \((\widetilde\ell_0,\ell_1)\) also be proper. Its increment \(\widetilde\Delta_0\) lies in the same interval in Equation~(13). Set \(g(r)=r/(1-r)\). On any compact interval \([a,b]\subset(0,1)\), take a partition \(a=x_0<\cdots<x_n=b\). Then
 \begin{align*}
@@ -367,49 +210,15 @@ The last expression tends to zero along partitions whose mesh tends to zero. The
 
 We prove Equation~(3) of Theorem~\ref{thm:factorization} by induction on \(T\). The case \(T=1\) is the ordinary binary entropy of a bounded proper score.
 
-For \(T\ge2\), split the leaf space into \(\mathcal Y_0=\{x:x_1=0\}\) and \(\mathcal Y_1=\{x:x_1=1\}\). Parameterize a full-support report distribution as
-\[
-Q=((1-p)Q_0,pQ_1).
-\]
-For \(x\in\mathcal Y_b\), realized-path locality implies
-\[
-S_T(Q,x)=S_b(p,Q_b,x),
-\tag{14}
-\]
-with no dependence on \(Q_{1-b}\).
+For \(T\ge2\), split the leaf space into \(\mathcal Y_0=\{x:x_1=0\}\) and \(\mathcal Y_1=\{x:x_1=1\}\). Parameterize a full-support report distribution as \[ Q=((1-p)Q_0,pQ_1). \] For \(x\in\mathcal Y_b\), realized-path locality implies \[ S_T(Q,x)=S_b(p,Q_b,x), \tag{14} \] with no dependence on \(Q_{1-b}\).
 
-Fix \(p\in(0,1)\). For every true conditional \(R_b\), global propriety with root probability \(p\) and all other reports fixed at truth implies
-\[
-\E_{R_b}S_b(p,R_b,Y)\le\E_{R_b}S_b(p,Q_b,Y).
-\]
-Thus \(S_b(p,\cdot,\cdot)\) is a bounded proper score on \(\mathcal Y_b\). Denote its entropy by
-\[
-K_b^p(R_b)=\E_{Y\sim R_b}S_b(p,R_b,Y).
-\]
+Fix \(p\in(0,1)\). For every true conditional \(R_b\), global propriety with root probability \(p\) and all other reports fixed at truth implies \[ \E_{R_b}S_b(p,R_b,Y)\le\E_{R_b}S_b(p,Q_b,Y). \] Thus \(S_b(p,\cdot,\cdot)\) is a bounded proper score on \(\mathcal Y_b\). Denote its entropy by \[ K_b^p(R_b)=\E_{Y\sim R_b}S_b(p,R_b,Y). \]
 
-Now fix true conditionals \(R_0,R_1\) and vary only the root report. Global propriety gives, for every true root probability \(a\in(0,1)\),
-\[
-(1-a)K_0^a(R_0)+aK_1^a(R_1)
-\le(1-a)K_0^p(R_0)+aK_1^p(R_1).
-\tag{15}
-\]
-Hence \(p\mapsto(K_0^p(R_0),K_1^p(R_1))\) is a bounded proper binary loss for every pair \(R_0,R_1\).
+Now fix true conditionals \(R_0,R_1\) and vary only the root report. Global propriety gives, for every true root probability \(a\in(0,1)\), \[ (1-a)K_0^a(R_0)+aK_1^a(R_1) \le(1-a)K_0^p(R_0)+aK_1^p(R_1). \tag{15} \] Hence \(p\mapsto(K_0^p(R_0),K_1^p(R_1))\) is a bounded proper binary loss for every pair \(R_0,R_1\).
 
-Fix a reference \(R_0^\circ\). Holding \(R_1\) fixed in Equation~(15), Lemma~\ref{lem:shared} shows that
-\[
-K_0^p(R_0)-K_0^p(R_0^\circ)
-\]
-is independent of \(p\). Thus \(K_0^p(R_0)=a_0(p)+K_0(R_0)\). The symmetric argument gives \(K_1^p(R_1)=a_1(p)+K_1(R_1)\). Substituting these expressions into Equation~(15) shows that \((a_0,a_1)\) is a proper binary loss because the \(K_b(R_b)\) terms are independent of the root report. Its entropy
-\[
-h_{T,\varnothing}(a)=(1-a)a_0(a)+aa_1(a)
-\]
-is concave.
+Fix a reference \(R_0^\circ\). Holding \(R_1\) fixed in Equation~(15), Lemma~\ref{lem:shared} shows that \[ K_0^p(R_0)-K_0^p(R_0^\circ) \] is independent of \(p\). Thus \(K_0^p(R_0)=a_0(p)+K_0(R_0)\). The symmetric argument gives \(K_1^p(R_1)=a_1(p)+K_1(R_1)\). Substituting these expressions into Equation~(15) shows that \((a_0,a_1)\) is a proper binary loss because the \(K_b(R_b)\) terms are independent of the root report. Its entropy \[ h_{T,\varnothing}(a)=(1-a)a_0(a)+aa_1(a) \] is concave.
 
-Choose any \(p_0\in(0,1)\). The branch score
-\[
-\widetilde S_b(Q_b,y)=S_b(p_0,Q_b,y)-a_b(p_0)
-\]
-is bounded, proper, and path-local, with entropy \(K_b\). The induction hypothesis decomposes \(K_b\) over the internal nodes below branch \(b\). Finally,
+Choose any \(p_0\in(0,1)\). The branch score \[ \widetilde S_b(Q_b,y)=S_b(p_0,Q_b,y)-a_b(p_0) \] is bounded, proper, and path-local, with entropy \(K_b\). The induction hypothesis decomposes \(K_b\) over the internal nodes below branch \(b\). Finally,
 \begin{align*}
 H_T(P)
 &=(1-a)K_0^a(P_0)+aK_1^a(P_1)\\
@@ -419,27 +228,11 @@ which yields Equation~(3).
 
 \section{Boundary normalization and score identification}\label{app:normalization}
 
-We first prove Equation~(8) carefully. For a leaf \(x\in\{0,1\}^T\), define a valid hard-coded strategy \(A^x\) by \(A^x(u)=x_{|u|+1}\) at every history of the appropriate depth. On outcome \(x\), its realized prediction vector equals \(x\), so deterministic completeness gives \(M_T(x,A^x(x))=0\). Since every loss is at most \(T\), perfect truthfulness gives
-\[
-0\le H_T(P)\le\E_PM_T(X,A^x(X))\le T(1-P(x)).
-\tag{16}
-\]
+We first prove Equation~(8) carefully. For a leaf \(x\in\{0,1\}^T\), define a valid hard-coded strategy \(A^x\) by \(A^x(u)=x_{|u|+1}\) at every history of the appropriate depth. On outcome \(x\), its realized prediction vector equals \(x\), so deterministic completeness gives \(M_T(x,A^x(x))=0\). Since every loss is at most \(T\), perfect truthfulness gives \[ 0\le H_T(P)\le\E_PM_T(X,A^x(X))\le T(1-P(x)). \tag{16} \]
 
-Each bounded concave node entropy in Equation~(3) has finite one-sided limits at \(0\) and \(1\). Write these limits as \(e_{u,0}\) and \(e_{u,1}\). Approach a deterministic leaf \(x\) through interior trees whose conditional probability at every node on the path tends to the corresponding bit of \(x\). Terms at off-path nodes vanish because their visitation probabilities tend to zero. Equations~(3) and (16) imply
-\[
-\sum_{u\prec x}e_{u,x_{|u|+1}}=0
-\tag{17}
-\]
-for every leaf \(x\).
+Each bounded concave node entropy in Equation~(3) has finite one-sided limits at \(0\) and \(1\). Write these limits as \(e_{u,0}\) and \(e_{u,1}\). Approach a deterministic leaf \(x\) through interior trees whose conditional probability at every node on the path tends to the corresponding bit of \(x\). Terms at off-path nodes vanish because their visitation probabilities tend to zero. Equations~(3) and (16) imply \[ \sum_{u\prec x}e_{u,x_{|u|+1}}=0 \tag{17} \] for every leaf \(x\).
 
-Set \(c_\varnothing=0\) and recursively define \(c_{ub}=c_u-e_{u,b}\). Equation~(17) gives \(c_x=0\) at every leaf. Replace
-\[
-h_{T,u}(q)
-\quad\text{by}\quad
-\widetilde h_{T,u}(q)=h_{T,u}(q)+(1-q)c_{u0}+qc_{u1}-c_u.
-\tag{18}
-\]
-The change in the entropy sum is
+Set \(c_\varnothing=0\) and recursively define \(c_{ub}=c_u-e_{u,b}\). Equation~(17) gives \(c_x=0\) at every leaf. Replace \[ h_{T,u}(q) \quad\text{by}\quad \widetilde h_{T,u}(q)=h_{T,u}(q)+(1-q)c_{u0}+qc_{u1}-c_u. \tag{18} \] The change in the entropy sum is
 \begin{align*}
 \sum_uP(u)[(1-q_u)c_{u0}+q_uc_{u1}-c_u]
 &=\sum_u[P(u0)c_{u0}+P(u1)c_{u1}-P(u)c_u]\\
@@ -447,31 +240,11 @@ The change in the entropy sum is
 \end{align*}
 Both endpoint values in Equation~(18) are zero. The transformed functions remain concave, so they are nonnegative. We drop the tilde below.
 
-Suppose every \(h_{T,u}\) is differentiable at the conditional \(q_u\) of an interior report \(Q\). In leaf-probability coordinates, the node contribution is the perspective
-\[
-[Q(u0)+Q(u1)]h_{T,u}\left(\frac{Q(u1)}{Q(u0)+Q(u1)}\right).
-\]
-Its derivative with respect to the probability of a descendant leaf in child \(b\) is
-\[
-h_{T,u}(q_u)+(b-q_u)h_{T,u}'(q_u).
-\]
-It has derivative zero for leaves outside the subtree. Summing over nodes gives the right side of Equation~(5). By Appendix~\ref{app:proper}, this derivative is the unique supporting score at \(Q\), so it equals the actual \(S_T(Q,x)\).
+Suppose every \(h_{T,u}\) is differentiable at the conditional \(q_u\) of an interior report \(Q\). In leaf-probability coordinates, the node contribution is the perspective \[ [Q(u0)+Q(u1)]h_{T,u}\left(\frac{Q(u1)}{Q(u0)+Q(u1)}\right). \] Its derivative with respect to the probability of a descendant leaf in child \(b\) is \[ h_{T,u}(q_u)+(b-q_u)h_{T,u}'(q_u). \] It has derivative zero for leaves outside the subtree. Summing over nodes gives the right side of Equation~(5). By Appendix~\ref{app:proper}, this derivative is the unique supporting score at \(Q\), so it equals the actual \(S_T(Q,x)\).
 
 \section{Proof of the tangent comparison}\label{app:tangent}
 
-Let
-\[
-\ell_p(0)=h(p)-ph'(p),
-\qquad
-\ell_p(1)=h(p)+(1-p)h'(p).
-\]
-The tangent inequality for a concave function gives
-\[
-0=h(0)\le h(p)-ph'(p),
-\qquad
-0=h(1)\le h(p)+(1-p)h'(p).
-\]
-Therefore both losses are nonnegative, and
+Let \[ \ell_p(0)=h(p)-ph'(p), \qquad \ell_p(1)=h(p)+(1-p)h'(p). \] The tangent inequality for a concave function gives \[ 0=h(0)\le h(p)-ph'(p), \qquad 0=h(1)\le h(p)+(1-p)h'(p). \] Therefore both losses are nonnegative, and
 \begin{align*}
 (1-q)\ell_p(0)+q\ell_p(1)
 &\le\max\left\{\frac{1-q}{1-p},\frac q p\right\}
@@ -479,28 +252,11 @@ Therefore both losses are nonnegative, and
 &=\max\left\{\frac{1-q}{1-p},\frac q p\right\}h(p).
 \tag{19}
 \end{align*}
-If \(p\le q\), write \(q=\lambda p+(1-\lambda)1\), where \(\lambda=(1-q)/(1-p)\). Concavity gives
-\[
-h(q)\ge\frac{1-q}{1-p}h(p).
-\]
-If \(p\ge q\), write \(q=\lambda p+(1-\lambda)0\), where \(\lambda=q/p\), to obtain \(h(q)\ge(q/p)h(p)\). In both cases,
-\[
-h(p)\le\max\left\{\frac{1-p}{1-q},\frac p q\right\}h(q).
-\tag{20}
-\]
-Equations~(19) and (20) prove Lemma~\ref{lem:tangent}.
+If \(p\le q\), write \(q=\lambda p+(1-\lambda)1\), where \(\lambda=(1-q)/(1-p)\). Concavity gives \[ h(q)\ge\frac{1-q}{1-p}h(p). \] If \(p\ge q\), write \(q=\lambda p+(1-\lambda)0\), where \(\lambda=q/p\), to obtain \(h(q)\ge(q/p)h(p)\). In both cases, \[ h(p)\le\max\left\{\frac{1-p}{1-q},\frac p q\right\}h(q). \tag{20} \] Equations~(19) and (20) prove Lemma~\ref{lem:tangent}.
 
 \section{A two-step illustration}\label{app:two-step}
 
-For \(T=2\), write a report tree as \((a,b_0,b_1)\), where \(a\) is the first forecast and \(b_i\) is the second forecast after observing \(X_1=i\). A realized-path score has the form
-\[
-S_{00}(a,b_0),\quad S_{01}(a,b_0),\quad S_{10}(a,b_1),\quad S_{11}(a,b_1).
-\]
-Theorem~\ref{thm:factorization} says that its entropy must be
-\[
-H(a,c_0,c_1)=h_\varnothing(a)+(1-a)h_0(c_0)+ah_1(c_1).
-\]
-At a differentiability point, the four losses are
+For \(T=2\), write a report tree as \((a,b_0,b_1)\), where \(a\) is the first forecast and \(b_i\) is the second forecast after observing \(X_1=i\). A realized-path score has the form \[ S_{00}(a,b_0),\quad S_{01}(a,b_0),\quad S_{10}(a,b_1),\quad S_{11}(a,b_1). \] Theorem~\ref{thm:factorization} says that its entropy must be \[ H(a,c_0,c_1)=h_\varnothing(a)+(1-a)h_0(c_0)+ah_1(c_1). \] At a differentiability point, the four losses are
 \begin{align*}
 S_{0j}&=h_\varnothing(a)-ah_\varnothing'(a)+h_0(b_0)+(j-b_0)h_0'(b_0),\\
 S_{1j}&=h_\varnothing(a)+(1-a)h_\varnothing'(a)+h_1(b_1)+(j-b_1)h_1'(b_1).
@@ -509,11 +265,6 @@ The score may use a different binary entropy after each first-round history. It 
 
 \section{Why a product-family score is not enough}\label{app:product}
 
-If forecasts were restricted to one constant parameter \(p\), the score
-\[
-\frac1T\left(\sum_{t=1}^T(x_t-p)\right)^2
-=T(\overline x-p)^2
-\]
-would be proper for the Bernoulli product family. Its truthful expected value is \(\alpha(1-\alpha)\), while a fixed wrong report has an additional \(T(\alpha-p)^2\) cost. This does not contradict Theorem~\ref{thm:impossibility}. For a general sequential distribution, the forecasts \(p_t\) can adapt to earlier residuals. Squaring the terminal sum creates cross terms through which a strategic forecaster can hedge past noise. The full-tree score in Equation~(10) avoids this problem by using the ex ante expectation of the total count under the entire reported tree.
+If forecasts were restricted to one constant parameter \(p\), the score \[ \frac1T\left(\sum_{t=1}^T(x_t-p)\right)^2 =T(\overline x-p)^2 \] would be proper for the Bernoulli product family. Its truthful expected value is \(\alpha(1-\alpha)\), while a fixed wrong report has an additional \(T(\alpha-p)^2\) cost. This does not contradict Theorem~\ref{thm:impossibility}. For a general sequential distribution, the forecasts \(p_t\) can adapt to earlier residuals. Squaring the terminal sum creates cross terms through which a strategic forecaster can hedge past noise. The full-tree score in Equation~(10) avoids this problem by using the ex ante expectation of the total count under the entire reported tree.
 
 \end{document}
