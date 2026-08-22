@@ -13,7 +13,7 @@ A calibration measure should assign sublinear error to correct probabilistic for
 
 ## Keywords
 
-perfectly, truthful, sequential, calibration, measure, should, assign, sublinear, error
+calibration measures, truthfulness, sequential prediction, proper scoring rules, impossibility results, forecasting incentives
 
 ## Files
 
